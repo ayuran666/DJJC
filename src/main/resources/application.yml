@@ -1,0 +1,36 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: DJJC
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/DJJC?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: 12345678
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    database: 0
+    connect-timeout: 30000
+  mail:
+    host: smtp.126.com
+    email: lizhang11220817@126.com
+    port: 25
+    username: lizhang11220817@126.com
+    password: VXNDKITGJNSWIHDY
+
+
+mybatis-plus:
+  configuration:
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      #雪花算法生成id
+      id-type: assign_id
+
+code:
+  dieTime: 300
