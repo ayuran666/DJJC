@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    @Value("${spring.mail.email}")
-    private String email;
+    @Value("${spring.mail.email-name}")
+    private String emailName;
     @Value("${spring.mail.host}")
     private String host;
     @Value("${spring.mail.port}")
@@ -24,13 +24,13 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void send(EmailDto emailDto) {
 
-        if(email == null || host == null || port == null || username == null || password == null){
+        if(emailName == null || host == null || port == null || username == null || password == null){
             throw new RuntimeException("邮件配置异常");
         }
         MailAccount mailAccount = new MailAccount();
         mailAccount.setHost(host);
         mailAccount.setPort(Integer.parseInt(port));
-        mailAccount.setFrom(username + "<" + email + ">");
+        mailAccount.setFrom(emailName + "<" + username + ">");
         mailAccount.setUser(username);
         // 设置发送授权码
         mailAccount.setPass(password);
@@ -39,6 +39,9 @@ public class EmailServiceImpl implements EmailService {
         mailAccount.setSslEnable(false);
         // 使用安全连接
         mailAccount.setStarttlsEnable(false);
+        mailAccount.setTimeout(2000000);
+        mailAccount.setDebug(true);
+
 
         try {
             int size = emailDto.getTos().size();

@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8080
 spring:
   application:
     name: DJJC
@@ -14,12 +14,18 @@ spring:
     host: 127.0.0.1
     database: 0
     connect-timeout: 30000
+    jedis:
+      pool:
+        max-idle: 500
+        min-idle: 50
+        max-active: 1000
+        max-wait: 2000
   mail:
     host: smtp.126.com
-    email: lizhang11220817@126.com
+    email-name: 校园鹰眼
     port: 25
-    username: lizhang11220817@126.com
-    password: VXNDKITGJNSWIHDY
+    username: lizhang0817@126.com
+    password: AXSEKBMAFGVRWMTD
 
 
 mybatis-plus:

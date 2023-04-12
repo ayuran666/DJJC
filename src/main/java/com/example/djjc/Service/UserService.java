@@ -11,4 +11,6 @@ public interface UserService extends IService<User> {
     Boolean registerEmailExist(String email);
 
     R<String> register(UserRegisterDto userRegisterDto);
+
+    R<String> login (User user);
 }
