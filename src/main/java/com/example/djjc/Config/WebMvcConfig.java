@@ -13,7 +13,6 @@ import java.util.List;
 public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 
-
     /**
      * 扩展消息转换器
      *
@@ -27,9 +26,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         //设置对象转换器
         messageConverter.setObjectMapper(new JacksonObjectMapper());
 
-        converters.add(0,messageConverter);
+        converters.add(0, messageConverter);
     }
 
-    
 
 }

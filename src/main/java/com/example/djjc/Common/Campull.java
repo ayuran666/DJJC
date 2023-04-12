@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Queue;
 
 
-public class Campull extends Thread{
+public class Campull extends Thread {
 
     CameraPullService cameraPullService = new CameraPullServiceImpl();
 
@@ -27,34 +27,35 @@ public class Campull extends Thread{
 
     private Boolean runing = true;
 
-    private RedisTemplate<String,Queue<String>> redisTemplate = null;
-
+    private RedisTemplate<String, Queue<String>> redisTemplate = null;
 
 
     public Campull(Long id, RedisTemplate<String, Queue<String>> redisTemplate) throws FrameGrabber.Exception {
         this.id = id;
         this.redisTemplate = redisTemplate;
     }
+
     @Override
-    public void run(){
+    public void run() {
         try {
-                cameraPullService.recordCamera(id,30,grabber,recorder,this.redisTemplate,this);
+            cameraPullService.recordCamera(id, 30, grabber, recorder, this.redisTemplate, this);
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
+
     public void close() throws FrameGrabber.Exception, FrameRecorder.Exception {
         this.runing = false;
-        if(recorder != null){
+        if (recorder != null) {
             recorder.stop();
             recorder.release();
         }
-        if(grabber != null){
+        if (grabber != null) {
             grabber.close();
         }
     }
 
-    public Boolean getRuning(){
+    public Boolean getRuning() {
         return this.runing;
     }
 

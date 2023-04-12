@@ -13,25 +13,25 @@ import java.util.Queue;
 @Component
 public class CamPullUtils {
 
-    private static final HashMap<Long,Campull> hashMap = new HashMap<>();
+    private static final HashMap<Long, Campull> hashMap = new HashMap<>();
 
     private static Boolean isopen = true;
 
-    public static void openOne(Long id,RedisTemplate<String,Queue<String>> redisTemplate) throws FrameGrabber.Exception {
-        Campull campull = new Campull(id,redisTemplate);
+    public static void openOne(Long id, RedisTemplate<String, Queue<String>> redisTemplate) throws FrameGrabber.Exception {
+        Campull campull = new Campull(id, redisTemplate);
         campull.start();
-        hashMap.put(id,campull);
+        hashMap.put(id, campull);
     }
 
-    public static void openList(List<Long> ids,RedisTemplate<String,Queue<String>> redisTemplate) throws FrameGrabber.Exception {
+    public static void openList(List<Long> ids, RedisTemplate<String, Queue<String>> redisTemplate) throws FrameGrabber.Exception {
         for (Long id : ids) {
-            openOne(id,redisTemplate);
+            openOne(id, redisTemplate);
         }
     }
 
     public static void closeOne(Long id) throws FrameGrabber.Exception, FrameRecorder.Exception {
         Campull campull = hashMap.get(id);
-        if(campull != null){
+        if (campull != null) {
             campull.close();
 
         }
@@ -44,15 +44,13 @@ public class CamPullUtils {
     }
 
 
-
-    public static Boolean getIsopen(){
+    public static Boolean getIsopen() {
         return isopen;
     }
 
-    public static void setIsopen(Boolean isopen){
+    public static void setIsopen(Boolean isopen) {
         CamPullUtils.isopen = isopen;
     }
-
 
 
 }

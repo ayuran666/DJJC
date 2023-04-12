@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 public class MyMateObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.setFieldValByName("createTime",LocalDateTime.now(),metaObject);
-        this.setFieldValByName("updateTime",LocalDateTime.now(),metaObject);
+        this.setFieldValByName("createTime", LocalDateTime.now(), metaObject);
+        this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
 
-        this.setFieldValByName("updateTime",LocalDateTime.now(),metaObject);
+        this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
     }
 }

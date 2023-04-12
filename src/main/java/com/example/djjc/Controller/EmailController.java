@@ -15,7 +15,7 @@ public class EmailController {
     private AuthUserService authUserService;
 
     @PostMapping("/getcode")
-    public R<String> getcode(@RequestParam("email") String email){
+    public R<String> getcode(@RequestParam("email") String email) {
         return authUserService.sendcode(email);
     }
 }

@@ -17,10 +17,10 @@ public class PcUtils {
 
     private static final GlobalMemory memory = OshiUtil.getMemory();
 
-    public static String getMemUsed(){
+    public static String getMemUsed() {
         double getTotal = new BigDecimal(memory.getTotal()).divide(GbDw).setScale(2, RoundingMode.HALF_UP).doubleValue();
         double getAvailable = new BigDecimal(memory.getAvailable()).divide(GbDw).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        return new DecimalFormat("#.##%").format((getTotal-getAvailable)/getTotal);
+        return new DecimalFormat("#.##%").format((getTotal - getAvailable) / getTotal);
     }
 
     public static String getCpuUsed() throws InterruptedException {
@@ -49,7 +49,7 @@ public class PcUtils {
         return new DecimalFormat("#.##%").format((cSys + user) * 1.0 / totalCpu);
     }
 
-    public static String getCpuTem(){
+    public static String getCpuTem() {
         Sensors sensors = OshiUtil.getSensors();
         return String.valueOf(sensors.getCpuTemperature());
     }

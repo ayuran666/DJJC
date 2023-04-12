@@ -10,10 +10,11 @@ public class WebSocketConfig {
 
     /**
      * 开启websocket支持
+     *
      * @return
      */
     @Bean
-    public ServerEndpointExporter serverEndpointExporter(){
+    public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();
     }
 

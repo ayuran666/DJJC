@@ -25,7 +25,7 @@ import java.util.Queue;
 public class Controller {
 
     @Resource
-    private RedisTemplate<String,Queue<String>> redisTemplate;
+    private RedisTemplate<String, Queue<String>> redisTemplate;
 
 
     @Autowired
@@ -37,15 +37,15 @@ public class Controller {
     }
 
     @PostMapping("/page")
-    public R<Page<Camera>> page(@RequestParam("page") int page, @RequestParam("pagesize") int pagesize){
-        return R.success(cameraService.page(page,pagesize));
+    public R<Page<Camera>> page(@RequestParam("page") int page, @RequestParam("pagesize") int pagesize) {
+        return R.success(cameraService.page(page, pagesize));
     }
 
     @GetMapping("/openone")
-    public R<String> openone(@RequestParam("id") Long id){
+    public R<String> openone(@RequestParam("id") Long id) {
 
         try {
-            CamPullUtils.openOne(id,redisTemplate);
+            CamPullUtils.openOne(id, redisTemplate);
         } catch (FrameGrabber.Exception e) {
             R.error("推流系统异常！");
         }
@@ -65,11 +65,11 @@ public class Controller {
     }
 
     @PostMapping("/openlist")
-    public R<String> openlist(@RequestParam("ids") List<Long> ids){
+    public R<String> openlist(@RequestParam("ids") List<Long> ids) {
 
 
         try {
-            CamPullUtils.openList(ids,redisTemplate);
+            CamPullUtils.openList(ids, redisTemplate);
         } catch (FrameGrabber.Exception e) {
             R.error("推流系统异常！");
         }
@@ -78,7 +78,7 @@ public class Controller {
 
 
     @PostMapping("/closelist")
-    public R<String> closelist(@RequestParam("ids") List<Long> ids){
+    public R<String> closelist(@RequestParam("ids") List<Long> ids) {
         try {
             CamPullUtils.closelist(ids);
         } catch (FrameGrabber.Exception | FrameRecorder.Exception e) {

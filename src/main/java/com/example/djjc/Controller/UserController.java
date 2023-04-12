@@ -22,12 +22,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public R<String> register(@RequestBody @Validated UserRegisterDto userRegisterDto){
+    public R<String> register(@RequestBody @Validated UserRegisterDto userRegisterDto) {
         return userService.register(userRegisterDto);
     }
 
     @PostMapping("/login")
-    public R<String> login(@RequestBody User user){
+    public R<String> login(@RequestBody User user) {
         return userService.login(user);
     }
 }
