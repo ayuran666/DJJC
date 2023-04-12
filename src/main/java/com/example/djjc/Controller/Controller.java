@@ -69,8 +69,8 @@ public class Controller {
 
 
         try {
-            CamPullUtils.closelist(ids);
-        } catch (FrameGrabber.Exception | FrameRecorder.Exception e) {
+            CamPullUtils.openList(ids,redisTemplate);
+        } catch (FrameGrabber.Exception e) {
             R.error("推流系统异常！");
         }
         return R.success("成功！");
@@ -79,6 +79,11 @@ public class Controller {
 
     @PostMapping("/closelist")
     public R<String> closelist(@RequestParam("ids") List<Long> ids){
-        return null;
+        try {
+            CamPullUtils.closelist(ids);
+        } catch (FrameGrabber.Exception | FrameRecorder.Exception e) {
+            R.error("推流系统异常！");
+        }
+        return R.success("成功！");
     }
 }
