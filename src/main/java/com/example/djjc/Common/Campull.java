@@ -3,8 +3,10 @@ package com.example.djjc.Common;
 import com.example.djjc.Service.CameraPullService;
 import com.example.djjc.Service.Serviceimpl.CameraPullServiceImpl;
 import com.example.djjc.Utils.CamPullUtils;
+import org.bytedeco.javacv.FFmpegFrameRecorder;
 import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.FrameRecorder;
+import org.bytedeco.javacv.OpenCVFrameGrabber;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -19,9 +21,9 @@ public class Campull extends Thread {
 
     CameraPullService cameraPullService = new CameraPullServiceImpl();
 
-    FrameGrabber grabber = null;
+    OpenCVFrameGrabber grabber = null;
 
-    FrameRecorder recorder = null;
+    FFmpegFrameRecorder recorder = null;
 
     private Long id;
 
@@ -54,6 +56,7 @@ public class Campull extends Thread {
             grabber.close();
         }
     }
+
 
     public Boolean getRuning() {
         return this.runing;
