@@ -16,6 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Queue;
 
 @Slf4j
@@ -35,21 +36,13 @@ public class Controller {
         return R.success(new Computer(PcUtils.getCpuUsed(), PcUtils.getMemUsed(), PcUtils.getCpuTem()));
     }
 
-    @GetMapping("/camerapull")
-    public R<String> camerapull() {
-
-
-        return null;
-
-    }
-
     @PostMapping("/page")
     public R<Page<Camera>> page(@RequestParam("page") int page, @RequestParam("pagesize") int pagesize){
         return R.success(cameraService.page(page,pagesize));
     }
 
     @GetMapping("/openone")
-    public R<String> openone(@RequestParam("id") String id){
+    public R<String> openone(@RequestParam("id") Long id){
 
         try {
             CamPullUtils.openOne(id,redisTemplate);
@@ -62,12 +55,30 @@ public class Controller {
     }
 
     @GetMapping("/closeone")
-    public R<String> closeone(@RequestParam("id") String id) {
+    public R<String> closeone(@RequestParam("id") Long id) {
         try {
-            CamPullUtils.close(id);
+            CamPullUtils.closeOne(id);
         } catch (FrameGrabber.Exception | FrameRecorder.Exception e) {
             R.error("推流系统异常！");
         }
         return R.success("成功！");
+    }
+
+    @PostMapping("/openlist")
+    public R<String> openlist(@RequestParam("ids") List<Long> ids){
+
+
+        try {
+            CamPullUtils.closelist(ids);
+        } catch (FrameGrabber.Exception | FrameRecorder.Exception e) {
+            R.error("推流系统异常！");
+        }
+        return R.success("成功！");
+    }
+
+
+    @PostMapping("/closelist")
+    public R<String> closelist(@RequestParam("ids") List<Long> ids){
+        return null;
     }
 }

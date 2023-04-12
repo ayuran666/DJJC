@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Queue;
 
 public interface CameraPullService {
-    void recordCamera(String id, double frameRate, FrameGrabber grabber, FrameRecorder recorder, RedisTemplate<String,Queue<String>> redisTemplate, Campull campull) throws IOException, InterruptedException;
+    void recordCamera(Long id, double frameRate, FrameGrabber grabber, FrameRecorder recorder, RedisTemplate<String,Queue<String>> redisTemplate, Campull campull) throws IOException, InterruptedException;
 
     void jietu(Frame frame, Queue<String> queue) throws IOException;
 }

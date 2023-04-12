@@ -31,7 +31,7 @@ public class CameraPullServiceImpl implements CameraPullService {
 
 
     @Override
-    public void recordCamera(String id, double frameRate, FrameGrabber grabber, FrameRecorder recorder, RedisTemplate<String,Queue<String>> redisTemplate, Campull campull) throws IOException, InterruptedException {
+    public void recordCamera(Long id, double frameRate, FrameGrabber grabber, FrameRecorder recorder, RedisTemplate<String,Queue<String>> redisTemplate, Campull campull) throws IOException, InterruptedException {
         Loader.load(opencv_objdetect.class);
         grabber = FrameGrabber.createDefault(0);//本机摄像头默认0，这里使用javacv的抓取器，至于使用的是ffmpeg还是opencv，请自行查看源码
         grabber.start();//开启抓取器
@@ -60,7 +60,7 @@ public class CameraPullServiceImpl implements CameraPullService {
             //frame.showImage(rotatedFrame);
             jietu(rotatedFrame,queue);
 
-            redisTemplate.opsForValue().set(id,queue,30, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(String.valueOf(id),queue,30, TimeUnit.SECONDS);
             if (startTime == 0) {
                 startTime = System.currentTimeMillis();
             }

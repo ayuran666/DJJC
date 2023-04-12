@@ -23,7 +23,7 @@ public class Campull extends Thread{
 
     FrameRecorder recorder = null;
 
-    private String id;
+    private Long id;
 
     private Boolean runing = true;
 
@@ -31,7 +31,7 @@ public class Campull extends Thread{
 
 
 
-    public Campull(String id, RedisTemplate<String, Queue<String>> redisTemplate) throws FrameGrabber.Exception {
+    public Campull(Long id, RedisTemplate<String, Queue<String>> redisTemplate) throws FrameGrabber.Exception {
         this.id = id;
         this.redisTemplate = redisTemplate;
     }
